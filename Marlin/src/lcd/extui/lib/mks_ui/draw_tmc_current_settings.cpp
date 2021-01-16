@@ -95,13 +95,14 @@ void lv_draw_tmc_current_settings(void) {
   scr = lv_screen_create(TMC_CURRENT_UI, machine_menu.TmcCurrentConfTitle);
 
   float milliamps;
+  char str_1[16];
   if (uiCfg.para_ui_page != 1) {
     #if AXIS_IS_TMC(X)
       milliamps = stepperX.getMilliamps();
     #else
       milliamps = -1;
     #endif
-    sprintf_P(public_buf_l, PSTR("%.1f"), milliamps);
+    sprintf_P(public_buf_l, PSTR("%s"), dtostrf(milliamps, 1, 1, str_1));
     lv_screen_menu_item_1_edit(scr, machine_menu.X_Current, PARA_UI_POS_X, PARA_UI_POS_Y, event_handler, ID_TMC_CURRENT_X, 0, public_buf_l);
 
     #if AXIS_IS_TMC(Y)
@@ -109,7 +110,7 @@ void lv_draw_tmc_current_settings(void) {
     #else
       milliamps = -1;
     #endif
-    sprintf_P(public_buf_l, PSTR("%.1f"), milliamps);
+    sprintf_P(public_buf_l, PSTR("%s"), dtostrf(milliamps, 1, 1, str_1));
     lv_screen_menu_item_1_edit(scr, machine_menu.Y_Current, PARA_UI_POS_X, PARA_UI_POS_Y * 2, event_handler, ID_TMC_CURRENT_Y, 1, public_buf_l);
 
     #if AXIS_IS_TMC(Z)
@@ -117,7 +118,7 @@ void lv_draw_tmc_current_settings(void) {
     #else
       milliamps = -1;
     #endif
-    sprintf_P(public_buf_l, PSTR("%.1f"), milliamps);
+    sprintf_P(public_buf_l, PSTR("%s"), dtostrf(milliamps, 1, 1, str_1));
     lv_screen_menu_item_1_edit(scr, machine_menu.Z_Current, PARA_UI_POS_X, PARA_UI_POS_Y * 3, event_handler, ID_TMC_CURRENT_Z, 2, public_buf_l);
 
     #if AXIS_IS_TMC(E0)
@@ -125,10 +126,10 @@ void lv_draw_tmc_current_settings(void) {
     #else
       milliamps = -1;
     #endif
-    sprintf_P(public_buf_l, PSTR("%.1f"), milliamps);
+    sprintf_P(public_buf_l, PSTR("%s"), dtostrf(milliamps, 1, 1, str_1));
     lv_screen_menu_item_1_edit(scr, machine_menu.E0_Current, PARA_UI_POS_X, PARA_UI_POS_Y * 4, event_handler, ID_TMC_CURRENT_E0, 3, public_buf_l);
 
-    lv_big_button_create(scr, "F:/bmp_back70x40.bin", machine_menu.next, PARA_UI_TURN_PAGE_POS_X, PARA_UI_TURN_PAGE_POS_Y, event_handler, ID_TMC_CURRENT_DOWN, true);
+    lv_screen_menu_item_turn_page(scr, machine_menu.next, event_handler, ID_TMC_CURRENT_DOWN);
   }
   else {
     #if AXIS_IS_TMC(E1)
@@ -136,13 +137,13 @@ void lv_draw_tmc_current_settings(void) {
     #else
       milliamps = -1;
     #endif
-    sprintf_P(public_buf_l, PSTR("%.1f"), milliamps);
+    sprintf_P(public_buf_l, PSTR("%s"), dtostrf(milliamps, 1, 1, str_1));
     lv_screen_menu_item_1_edit(scr, machine_menu.E1_Current, PARA_UI_POS_X, PARA_UI_POS_Y, event_handler, ID_TMC_CURRENT_E1, 0, public_buf_l);
 
-    lv_big_button_create(scr, "F:/bmp_back70x40.bin", machine_menu.previous, PARA_UI_TURN_PAGE_POS_X, PARA_UI_TURN_PAGE_POS_Y, event_handler, ID_TMC_CURRENT_UP, true);
+    lv_screen_menu_item_turn_page(scr, machine_menu.previous, event_handler, ID_TMC_CURRENT_UP);
   }
 
-  lv_big_button_create(scr, "F:/bmp_back70x40.bin", common_menu.text_back, PARA_UI_BACL_POS_X, PARA_UI_BACL_POS_Y, event_handler, ID_TMC_CURRENT_RETURN, true);
+  lv_screen_menu_item_return(scr, event_handler, ID_TMC_CURRENT_RETURN);
 }
 
 void lv_clear_tmc_current_settings() {
