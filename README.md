@@ -67,7 +67,7 @@ The images should be added to gcode file when slicing, and MKS has developed the
      
 - platformio.ini: 
      
-     default_envs = mks_robin_nano_v3_usb_flash_drive
+     default_envs = mks_robin_nano_v3_usb_flash_drive_msc
 - Configuation.h:   
      #define SERIAL_PORT -1  
      #define MKS_TS35_V2_0  
@@ -76,7 +76,7 @@ The images should be added to gcode file when slicing, and MKS has developed the
      #define TOUCH_SCREEN
 
 - Configuation_adv.h:    
-     No you can either use the TF card or USB disk, use TF card:   
+     Now you can either use the TF card or USB disk, use TF card:   
     // #define USB_FLASH_DRIVE_SUPPORT  
     Use USB disk:  
      #define USB_FLASH_DRIVE_SUPPORT  
